@@ -1,5 +1,4 @@
 import os
-
 import cv2
 import numpy as np
 import tkinter as tk
@@ -8,6 +7,7 @@ from tkinter import filedialog
 import tkinter.font as tkFont
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plt
+
 
 class Main(tk.Tk):
 
@@ -32,23 +32,23 @@ class Main(tk.Tk):
 
     def _event_after_browse(self, path_image=None):
         self.pil_image1 = Image.open(path_image)
-        self.pil_image1 = self.pil_image1.resize((450, 450), Image.ANTIALIAS)
+        self.pil_image1 = self.pil_image1.resize((350, 350), Image.ANTIALIAS)
         self.image1 = ImageTk.PhotoImage(self.pil_image1)
         self.Label_1 = tk.Label(self.frame_gambar_asli, image=self.image1)
-        self.Label_1.place(x=10, y=0, width=480, height=480)
+        self.Label_1.place(x=10, y=0, width=350, height=350)
 
     def _event_setelah_manipulasi_gambar(self):
         self.pil_image = Image.open(self.result_image)
-        self.pil_image = self.pil_image.resize((450, 450), Image.ANTIALIAS)
+        self.pil_image = self.pil_image.resize((350, 350), Image.ANTIALIAS)
         self.image = ImageTk.PhotoImage(self.pil_image)
         self.Label_2 = tk.Label(self.frame_gambar_hasil, image=self.image)
-        self.Label_2.place(x=10, y=0, width=480, height=480)
+        self.Label_2.place(x=10, y=0, width=350, height=350)
 
     def _event_setelah_manipulasi_gambar1(self):
         self.pil_image = Image.open(self.result_image)
         self.image = ImageTk.PhotoImage(self.pil_image)
         self.Label_2 = tk.Label(self.frame_gambar_hasil, image=self.image)
-        self.Label_2.place(x=10, y=0, width=480, height=480)
+        self.Label_2.place(x=10, y=0, width=350, height=350)
 
     def _event_dilasi_gambar(self):
         imggambar = cv2.imread(self.textbox_path_gambar.get(), 0)
@@ -297,7 +297,7 @@ class Main(tk.Tk):
         self.button_rotasi.place(x=10, y=50, width=100, height=25)
 
     def _event_equalize_gambar(self):
-        imggambar = cv2.imread(os.getcwd() + "\\afm.jpg", 0)
+        imggambar = cv2.imread(self.textbox_path_gambar.get(), 0)
         img_equalized = cv2.equalizeHist(imggambar)
         tampil_hor = np.concatenate((imggambar, img_equalized), axis=0)
         cv2.imwrite("hasil/hasil_equalized.jpg", tampil_hor)
@@ -327,7 +327,7 @@ class Main(tk.Tk):
         self.label_judul["font"] = ft
         self.label_judul["fg"] = "#333333"
         self.label_judul["justify"] = "center"
-        self.label_judul["text"] = "Open CV"
+        self.label_judul["text"] = "OpenCV"
         self.label_judul.place(x=300, y=40, width=400, height=49)
 
         # label frame
